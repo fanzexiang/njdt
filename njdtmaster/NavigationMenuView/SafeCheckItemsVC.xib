@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SafeCheckItemsVC" customModule="njdtmaster" customModuleProvider="target">
+            <connections>
+                <outlet property="itemsTableView" destination="BS3-bp-Xzp" id="Gdq-1a-Aj7"/>
+                <outlet property="sumbitButton" destination="FxS-Iw-Pp5" id="ouy-rB-zHR"/>
+                <outlet property="summaryText" destination="QpQ-9X-7Ox" id="htp-8Q-TRA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BS3-bp-Xzp">
+                    <rect key="frame" x="0.0" y="43" width="375" height="422"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="422" id="fU2-Lk-UZG"/>
+                    </constraints>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FxS-Iw-Pp5">
+                    <rect key="frame" x="1" y="617" width="373" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="k1u-gP-owT"/>
+                    </constraints>
+                    <state key="normal" title="提交" backgroundImage="submit_normal">
+                        <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="safeSubmit:" destination="-1" eventType="touchUpInside" id="aCK-Mh-0rR"/>
+                    </connections>
+                </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QpQ-9X-7Ox">
+                    <rect key="frame" x="1" y="485" width="373" height="100"/>
+                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="VvX-1g-Gvf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="BS3-bp-Xzp" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="23" id="5io-r5-5lo"/>
+                <constraint firstItem="BS3-bp-Xzp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="GWP-xR-7wj"/>
+                <constraint firstItem="QpQ-9X-7Ox" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="1" id="Gbb-LM-DCP"/>
+                <constraint firstAttribute="trailing" secondItem="QpQ-9X-7Ox" secondAttribute="trailing" constant="1" id="R0N-kG-yve"/>
+                <constraint firstItem="BS3-bp-Xzp" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="UT1-Ft-Vp3"/>
+                <constraint firstItem="QpQ-9X-7Ox" firstAttribute="top" secondItem="BS3-bp-Xzp" secondAttribute="bottom" constant="20" id="d3g-QD-qU2"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FxS-Iw-Pp5" secondAttribute="bottom" constant="10" id="ftR-4i-wSo"/>
+                <constraint firstAttribute="trailing" secondItem="FxS-Iw-Pp5" secondAttribute="trailing" constant="1" id="k2d-Tk-4Cl"/>
+                <constraint firstItem="FxS-Iw-Pp5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="1" id="nnC-BO-1V9"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="170" y="-371"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="submit_normal" width="462" height="62"/>
+    </resources>
+</document>

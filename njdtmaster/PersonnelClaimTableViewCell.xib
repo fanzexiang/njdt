@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="86" id="9BI-Uy-WMh" customClass="PersonnelClaimTableViewCell" customModule="njdtmaster" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9BI-Uy-WMh" id="tfp-Fo-2Is">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="57.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zvs-E8-arE">
+                        <rect key="frame" x="5" y="5" width="310" height="48"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8aO-1Y-gCD">
+                                <rect key="frame" x="0.0" y="0.0" width="23" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="OEA-jA-QL5"/>
+                                    <constraint firstAttribute="width" constant="23" id="hUW-WZ-hjI"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="prI-NF-h6O">
+                                <rect key="frame" x="0.0" y="25" width="23" height="23"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSG-AT-IS5">
+                                <rect key="frame" x="36" y="0.0" width="228" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9m-Nf-W7h">
+                                <rect key="frame" x="36" y="25" width="228" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="TI9-pz-Xrp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NyE-cs-9Vy" customClass="CCheckbox" customModule="njdtmaster" customModuleProvider="target">
+                                <rect key="frame" x="284" y="11" width="26" height="26"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="normalImage" value="icon_checkbox_unchecked"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="icon_checkbox_checked"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCheckboxSelected" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wSG-AT-IS5" firstAttribute="trailing" secondItem="F9m-Nf-W7h" secondAttribute="trailing" id="19S-KY-oU4"/>
+                            <constraint firstAttribute="bottom" secondItem="prI-NF-h6O" secondAttribute="bottom" id="4rh-O0-VV0"/>
+                            <constraint firstItem="NyE-cs-9Vy" firstAttribute="top" secondItem="zvs-E8-arE" secondAttribute="top" constant="11" id="BaM-YD-RAK"/>
+                            <constraint firstItem="NyE-cs-9Vy" firstAttribute="leading" secondItem="wSG-AT-IS5" secondAttribute="trailing" constant="20" id="HGT-WP-Ggx"/>
+                            <constraint firstItem="NyE-cs-9Vy" firstAttribute="centerY" secondItem="zvs-E8-arE" secondAttribute="centerY" id="Ldc-dp-tBV"/>
+                            <constraint firstItem="wSG-AT-IS5" firstAttribute="bottom" secondItem="8aO-1Y-gCD" secondAttribute="bottom" id="Mk6-ZS-wFk"/>
+                            <constraint firstItem="prI-NF-h6O" firstAttribute="leading" secondItem="8aO-1Y-gCD" secondAttribute="leading" id="NMm-0w-lJg"/>
+                            <constraint firstItem="prI-NF-h6O" firstAttribute="top" secondItem="F9m-Nf-W7h" secondAttribute="top" id="Ooq-Yl-mdG"/>
+                            <constraint firstItem="F9m-Nf-W7h" firstAttribute="leading" secondItem="prI-NF-h6O" secondAttribute="trailing" constant="13" id="Q4z-lD-cbM"/>
+                            <constraint firstItem="prI-NF-h6O" firstAttribute="trailing" secondItem="8aO-1Y-gCD" secondAttribute="trailing" id="dy7-a1-bk0"/>
+                            <constraint firstItem="prI-NF-h6O" firstAttribute="leading" secondItem="zvs-E8-arE" secondAttribute="leading" id="f5i-D3-UdJ"/>
+                            <constraint firstItem="prI-NF-h6O" firstAttribute="centerY" secondItem="F9m-Nf-W7h" secondAttribute="centerY" id="gx5-XI-H1q"/>
+                            <constraint firstItem="wSG-AT-IS5" firstAttribute="centerX" secondItem="zvs-E8-arE" secondAttribute="centerX" constant="-5" id="hY4-z1-7sT"/>
+                            <constraint firstItem="wSG-AT-IS5" firstAttribute="leading" secondItem="F9m-Nf-W7h" secondAttribute="leading" id="kxG-dj-rTo"/>
+                            <constraint firstItem="8aO-1Y-gCD" firstAttribute="top" secondItem="zvs-E8-arE" secondAttribute="top" id="lXl-wO-3Oq"/>
+                            <constraint firstAttribute="trailing" secondItem="NyE-cs-9Vy" secondAttribute="trailing" id="mJF-kh-FTL"/>
+                            <constraint firstItem="wSG-AT-IS5" firstAttribute="centerY" secondItem="8aO-1Y-gCD" secondAttribute="centerY" id="zr5-H2-44F"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="zvs-E8-arE" firstAttribute="top" secondItem="tfp-Fo-2Is" secondAttribute="top" constant="5" id="Hze-vF-UnQ"/>
+                    <constraint firstAttribute="bottom" secondItem="zvs-E8-arE" secondAttribute="bottom" constant="5" id="KF7-4g-1zE"/>
+                    <constraint firstItem="zvs-E8-arE" firstAttribute="leading" secondItem="tfp-Fo-2Is" secondAttribute="leading" constant="5" id="bMj-0t-3N7"/>
+                    <constraint firstAttribute="trailing" secondItem="zvs-E8-arE" secondAttribute="trailing" constant="5" id="zEE-5A-7ym"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="checkbox" destination="NyE-cs-9Vy" id="vOI-G4-0mc"/>
+                <outlet property="customView" destination="zvs-E8-arE" id="ZjL-Vw-tvs"/>
+                <outlet property="phoneImage" destination="prI-NF-h6O" id="hnE-Tb-y9C"/>
+                <outlet property="phoneLabel" destination="F9m-Nf-W7h" id="80K-Bo-KyE"/>
+                <outlet property="userImage" destination="8aO-1Y-gCD" id="7Iw-BN-wkP"/>
+                <outlet property="userLabel" destination="wSG-AT-IS5" id="NEG-UI-Bdx"/>
+            </connections>
+            <point key="canvasLocation" x="321" y="667"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_checkbox_checked" width="49" height="49"/>
+        <image name="icon_checkbox_unchecked" width="48" height="48"/>
+    </resources>
+</document>
