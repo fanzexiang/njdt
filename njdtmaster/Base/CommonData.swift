@@ -34,6 +34,7 @@ class CommonData {
     static let TXCODE_MY_SAFE_CHECK = "mySafecheck" //保险公司我的抽查
     static let TXCODE_GET_CHECK_ITEMS = "getCheckItems" //保险公司获取抽查项
     static let TXCODE_FORM_CHECK = "formCheck"
+    static let TXCODE_CHECK_LOGIN = "checkLogin"   //管理员账号
     
     
     /*
@@ -132,7 +133,7 @@ class CommonData {
     /*
         NetWork Address
      */
-    static let WEATHER_PATH:String = "http://api.map.baidu.com/telematics/v3/weather"//百度天气接口
+    static let WEATHER_PATH:String = "https://www.sojson.com/open/api/weather/json.shtml"//百度天气接口
     //96333服务器地址
     static let CONSTANT_PATH_GET_96333:String = "http://202.102.108.167:18082/njlift/android/process.action?data="
     static let CONSTANT_PATH_POST_96333:String = "http://202.102.108.167:18082/njlift/android/process.action?"

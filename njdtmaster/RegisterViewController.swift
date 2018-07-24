@@ -8,6 +8,8 @@
 
 import UIKit
 import AdSupport
+import Alamofire
+import SwiftyJSON
 
 class RegisterViewController: UIViewController  {
 
@@ -24,7 +26,7 @@ class RegisterViewController: UIViewController  {
     //此两组信息需要根据不同角色显示不同的内容
     @IBOutlet weak var thirdIcon: UIImageView!
     @IBOutlet weak var thirdTextField: UITextField!
-    @IBOutlet weak var btn: UIButton!
+    @IBOutlet weak var adminBtn: UIButton!
     
     var rolePickerView: RolePickerView?
     var inspectionPickerView: InspectionPickerView?
@@ -102,6 +104,95 @@ class RegisterViewController: UIViewController  {
        
         toast.showToast(text: "注册成功，请联系公司管理员认领！", pos: .Bottom)
     }
+    
+    @IBAction func adminBtn(_ sender: UIButton){
+        if(userRole.text == "请选择角色"){
+            toast.showToast(text: "请选择角色！", pos: .Bottom)
+            return ;
+        }
+        if (userName.text?.isEmpty)!{
+            toast.showToast(text: "请输入姓名！", pos: .Bottom)
+            return ;
+        }
+        if(userPhone.text?.isEmpty)!{
+            toast.showToast(text: "请输入手机号！", pos: .Bottom)
+            return ;
+        }
+        //设置视图适配
+        let users = User()
+        users.userName = userName.text
+        users.userPhone = userPhone.text
+        users.userRole = userRole.text
+        users.userJobnum = thirdTextField.text
+        
+        //调用管理员接口
+      
+        var uuid:String = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        uuid = uuid.replacingOccurrences(of: "-", with: "")
+        Alamofire.request(CommonData.CONSTANT_PATH_POST_MAINT, method: .post, parameters: ["data":"{\"txcode\":\"\(CommonData.TXCODE_CHECK_LOGIN)\",\"tel\":\"\(users.userPhone as String)\",\"name\":\"\(users.userName as String)\",\"imei\":\"\(uuid as String)\"}"], encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result.isSuccess {
+            case true:
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    let loginFlag = json["rescode"].string!
+                    if loginFlag == "0" {
+                        CommonData.MAINT_ID = json["data"]["maintId"].string!
+                        CommonData.MAINT_NAME = json["data"]["maintName"].string!
+                        CommonData.INSURE_ID = json["data"]["insureId"].string!
+                        CommonData.INSURE_NAME = json["data"]["insureName"].string!
+                        CommonData.COMPANY_ID = json["data"]["companyId"].string!
+                        CommonData.COMPANY_NAME = json["data"]["companyName"].string!
+                        CommonData.CLIENT_ID = json["data"]["clientId"].string!
+                        CommonData.STAFF_NAME = json["data"]["staffName"].string!
+                        CommonData.STAFF_ROLE = json["data"]["staffRole"].string!
+                        CommonData.DEPT_TYPE = json["data"]["deptType"].string!
+                        CommonData.LAST_LOGIN_TIME = json["data"]["lastTime"].string!
+                        CommonData.CLIENT_ID_96333 = json["data"]["9clientId"].string!
+                        CommonData.MAINT_ID_96333 = json["data"]["9maintId"].string!
+                        if CommonData.STAFF_ROLE == "1" {
+                            CommonData.SIDE_TITILE_ARRAY = [CommonData.TITLE_SIDE_PERSONNEL_CLAIM,CommonData.TITLE_SIDE_PERSONNEL_MANAGEMENT,CommonData.TITLE_SIDE_REAL_TIME_POSITION,CommonData.TITLE_SIDE_RESUCE_STATISTICS,CommonData.TITLE_SIDE_NOTICE_INFO, CommonData.TITLE_SIDE_MY_RANK, CommonData.TITLE_SIDE_MY_INFO, CommonData.TITLE_SIDE_MAINTENANCE_STATISTICS]
+                            CommonData.SIDE_IMAGE_ARRAY = ["icon_side_ryrl","icon_side_rygl","icon_side_sswz","icon_side_jytj","icon_side_ggxx",
+                                                           "icon_side_wdpm", "icon_side_wdxx", "icon_side_wbtj"]
+                        }
+                        (UIApplication.shared.delegate as! AppDelegate).loadMainView()
+                    }else if loginFlag == "1"{
+                        let toast = ToastView()
+                        toast.showToast(text: CommonData.TOAST_REGISTER_DONE, pos: .Bottom)
+                        let time: TimeInterval = 1//延迟
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
+                            exit(0)//使用该方法，上架苹果商店可能被拒。
+                        }
+                    }else if loginFlag == "2"{
+                        self.performSegue(withIdentifier: "validatefaild", sender: nil)
+                    }
+                }else{
+                    print(response.result.value!)
+                }
+            case false:
+                print(CommonData.LOG_CALL_INTERFACE_ERROR)
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     //在这个方法中给新页面传递参数
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

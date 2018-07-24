@@ -112,18 +112,16 @@ extension SideViewController : UITableViewDelegate, UITableViewDataSource
             let authorImage = UIImageView(image: UIImage(named: "11"))
             authorImage.frame = CGRect(x:12,y:56,width:64,height:64)
             headView.addSubview(authorImage)
-            let url = URL(string: self.imgURL)
-            let data = try! Data(contentsOf: url!)
-            let weatherImageView = UIImageView(image: UIImage(data: data))
+            
             dateLabel.frame = CGRect(x: 90, y: 60, width: 170, height: 30)
-            weatherLabel.frame = CGRect(x: 112, y: 90, width: 100, height: 30)
-            temperatureLabel.frame = CGRect(x: 180, y: 90, width: 60, height: 30)
-            weatherImageView.frame = CGRect(x: 90, y:94, width: 20,height: 20)
+            weatherLabel.frame = CGRect(x: 90, y: 90, width: 60, height: 30)
+            temperatureLabel.frame = CGRect(x: 140, y: 90, width: 160, height: 30)
+            
             dateLabel.textAlignment = NSTextAlignment.left
             weatherLabel.textAlignment = NSTextAlignment.left
             temperatureLabel.textAlignment = NSTextAlignment.left
-            dateLabel.font = UIFont.systemFont(ofSize: 13)
-            weatherLabel.font = UIFont.systemFont(ofSize: 12)
+            dateLabel.font = UIFont.systemFont(ofSize: 16)
+            weatherLabel.font = UIFont.systemFont(ofSize: 16)
             temperatureLabel.font = UIFont.systemFont(ofSize: 12)
             let str:String = weatherLabel.text!
             if str.count > 7 {//判断天气信息字符串过长时，缩小字体以及调整温度Label水平位置
@@ -142,23 +140,23 @@ extension SideViewController : UITableViewDelegate, UITableViewDataSource
             headView.addSubview(dateLabel)
             headView.addSubview(weatherLabel)
             headView.addSubview(temperatureLabel)
-            headView.addSubview(weatherImageView)
-    
+            
         }
         return headView
     }
     //调用天气接口
     func getWeatherData(){
-        Alamofire.request(CommonData.WEATHER_PATH, method: .get, parameters: ["location":CommonData.NANJING,"output":"json","ak":"6tYzTvGZSOpYB5Oc2YGGOKt8"], encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+        Alamofire.request(CommonData.WEATHER_PATH, method: .get, parameters: ["city":CommonData.NANJING], encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result.isSuccess {
             case true:
                 if let value = response.result.value {
                     let json = JSON(value)
-                    if (json["status"].string! == "success"){
-                        self.weatherDic["weatherDate"] = json["results"][0]["weather_data"][0]["date"].string!
-                        self.weatherDic["weatherInfo"] = json["results"][0]["weather_data"][0]["weather"].string!
-                        self.weatherDic["weatherTemperature"] = json["results"][0]["weather_data"][0]["temperature"].string!
-                        self.weatherDic["weatherImgURL"] = json["results"][0]["weather_data"][0]["dayPictureUrl"].string!
+                    if (json["status"] == 200){
+                        self.weatherDic["weatherDate"] = json["date"].string!
+                        self.weatherDic["weatherInfo"] = json["data"]["forecast"][0]["type"].string!
+                        var tempHigh = json["data"]["forecast"][0]["high"].string!.replacingOccurrences(of: "高温", with: "")
+                        var tempLow = json["data"]["forecast"][0]["low"].string!.replacingOccurrences(of: "低温", with: "")
+                        self.weatherDic["weatherTemperature"] = tempHigh+"~"+tempLow
                     }
                 }
             case false:
@@ -214,11 +212,6 @@ extension SideViewController : UITableViewDelegate, UITableViewDataSource
                     myInfoVC.title = CommonData.SIDE_TITILE_ARRAY[indexPath.row]
                     rootVC.currentNavController?.pushViewController(myInfoVC, animated: true)
                     print("侧边页面：\(String(describing: myInfoVC.title!))")
-                case 7:
-                    let maintenanceStatisticsVC = MaintenanceStatisticsSubVC()
-                    maintenanceStatisticsVC.title = CommonData.SIDE_TITILE_ARRAY[indexPath.row]
-                    rootVC.currentNavController?.pushViewController(maintenanceStatisticsVC, animated: true)
-                    print("侧边页面：\(String(describing: maintenanceStatisticsVC.title!))")
                 default:
                     print("错误菜单选项")
                 }
@@ -239,11 +232,6 @@ extension SideViewController : UITableViewDelegate, UITableViewDataSource
                     myInfoVC.title = CommonData.SIDE_TITILE_ARRAY[indexPath.row]
                     rootVC.currentNavController?.pushViewController(myInfoVC, animated: true)
                     print("侧边页面：\(String(describing: myInfoVC.title!))")
-                case 3:
-                    let maintenanceStatisticsVC = MaintenanceStatisticsSubVC()
-                    maintenanceStatisticsVC.title = CommonData.SIDE_TITILE_ARRAY[indexPath.row]
-                    rootVC.currentNavController?.pushViewController(maintenanceStatisticsVC, animated: true)
-                    print("侧边页面：\(String(describing: maintenanceStatisticsVC.title!))")
                 default:
                     print("错误菜单选项")
                 }

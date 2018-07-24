@@ -20,6 +20,7 @@
 
 //#import "BMKClusterManager.h"
 //#import "PromptInfo.h"
-
+#import "JPUSHService.h"
+#import <UserNotifications/UserNotifications.h>
 
 #endif /* BMKSwiftDemo_Bridging_Header_h */

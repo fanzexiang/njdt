@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "group:../SwiftyJSON-master"
+      name = "SwiftyJSON-master">
+      <Group
+         location = "group:Example"
+         name = "Example">
+         <Group
+            location = "group:Example"
+            name = "Example">
+            <Group
+               location = "group:Base.lproj"
+               name = "Base.lproj">
+            </Group>
+         </Group>
+      </Group>
+      <Group
+         location = "group:Source"
+         name = "Source">
+      </Group>
+      <Group
+         location = "group:Tests"
+         name = "Tests">
+         <Group
+            location = "group:SwiftyJSONTests"
+            name = "SwiftyJSONTests">
+         </Group>
+      </Group>
+   </Group>
    <FileRef
       location = "self:">
    </FileRef>

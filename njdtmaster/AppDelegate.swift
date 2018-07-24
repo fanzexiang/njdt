@@ -7,11 +7,11 @@
 //
 
 import UIKit
-
+import AdSupport
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate{
-
+class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate,JPUSHRegisterDelegate{
+  
     var window: UIWindow?
     var _mapManager: BMKMapManager?
     var rootVC :XYSideViewControllerSwift!
@@ -35,6 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate{
         if ret == false {
             NSLog("manager start failed!")
         }
+        
+        //
+        let entity = JPUSHRegisterEntity();
+        entity.types = Int(JPAuthorizationOptions.alert.rawValue) |  Int(JPAuthorizationOptions.sound.rawValue) | Int(JPAuthorizationOptions.badge.rawValue);
+        JPUSHService.register(forRemoteNotificationConfig: entity, delegate: self);
+        let advertisingId = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        JPUSHService.setup(withOption: launchOptions, appKey: "f22997b15d456e1b6a16424c", channel: "App Store", apsForProduction: false, advertisingIdentifier: advertisingId)
+         NotificationCenter.default.addObserver(self, selector: #selector(networkDidReceiveMessage(notification:)), name: NSNotification.Name.jpfNetworkDidReceiveMessage, object: nil)
         
         return true
     }
@@ -142,7 +150,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKGeneralDelegate{
             NSLog("授权失败，错误代码：Error\(iError)");
         }
     }
-
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        JPUSHService.registerDeviceToken(deviceToken)
+    }
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print(error)
+    }
+    
+    
+    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, willPresent notification: UNNotification!, withCompletionHandler completionHandler: ((Int) -> Void)!) {
+        let userInfo = notification.request.content.userInfo;
+        if notification.request.trigger is UNPushNotificationTrigger {
+            JPUSHService.handleRemoteNotification(userInfo);
+        }
+        completionHandler(Int(UNNotificationPresentationOptions.alert.rawValue))
+    }
+    
+    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, didReceive response: UNNotificationResponse!, withCompletionHandler completionHandler: (() -> Void)!) {
+        let userInfo = response.notification.request.content.userInfo
+        if response.notification.request.trigger is UNPushNotificationTrigger {
+            JPUSHService.handleRemoteNotification(userInfo)
+        }
+        completionHandler()
+      
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        JPUSHService.handleRemoteNotification(userInfo)
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        JPUSHService.handleRemoteNotification(userInfo)
+    }
+    @objc func networkDidReceiveMessage(notification: Notification) {
+       
+        print("---------------");
+    }
 
 }
 
